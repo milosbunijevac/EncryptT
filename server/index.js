@@ -29,3 +29,11 @@ app.post('passphrase', (req, res) => {
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/src', 'index.html'));
 })
+
+app.listen(port, (error) => {
+    if(error){
+        console.log('This is the express error: ', error);
+    } else {
+        console.log('Express is listening on port: ', port);
+    }
+})
