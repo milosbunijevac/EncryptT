@@ -15,5 +15,19 @@
   "bugs": {
     "url": "https://github.com/milosbunijevac/EncryptT/issues"
   },
-  "homepage": "https://github.com/milosbunijevac/EncryptT#readme"
+  "homepage": "https://github.com/milosbunijevac/EncryptT#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "nodemon": "^1.11.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "request": "^2.81.0",
+    "webpack": "^2.4.1"
+  }
 }
