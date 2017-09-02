@@ -9,7 +9,6 @@ class Name extends React.Component {
   render() {
     return <p>{this.state.someKey}</p>;
   }
-
 }
 
 export default Name;

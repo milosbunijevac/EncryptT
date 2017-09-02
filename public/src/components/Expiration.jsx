@@ -9,7 +9,6 @@ class Expiration extends React.Component {
   render() {
     return <p>{this.state.someKey}</p>;
   }
-
 }
 
 export default Expiration;

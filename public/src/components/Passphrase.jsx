@@ -9,7 +9,6 @@ class Passphrase extends React.Component {
   render() {
     return <p>{this.state.someKey}</p>;
   }
-
 }
 
 export default Passphrase;

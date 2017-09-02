@@ -9,7 +9,6 @@ class Message extends React.Component {
   render() {
     return <p>{this.state.someKey}</p>;
   }
-
 }
 
 export default Message;

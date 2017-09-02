@@ -1,22 +1,22 @@
 import React from 'react';
 
-import Name from './Name.jsx';
-import Message from './Message.jsx';
-import Expiration from './Expiration.jsx';
-import Passphrase from './Passphrase.jsx';
+import Name from './Name';
+import Message from './Message';
+import Expiration from './Expiration';
+import Passphrase from './Passphrase';
 
 class Main extends React.Component {
-    constructor(){
-        super();
-    }
-
-    render() {
-        return (
-            <div>
-                THIS IS THE REACT APP COMPONENT
-            </div>
-        )
-    }
+  constructor() {
+    super();
+    this.state = { test: '' };
+  }
+  render() {
+    return (
+      <div>
+        This is a test so far
+      </div>
+    );
+  }
 }
 
 export default Main;
