@@ -1,9 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
-  entry: path.join(__dirname, '/public/src/', 'index.js'),
+  entry: [
+    path.join(__dirname, '/public/src/', 'index.js'),
+  ],
   output: ({ path: path.join(`${__dirname}/public/`), filename: 'bundle.js' }),
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
   module: {
     loaders: [
       {

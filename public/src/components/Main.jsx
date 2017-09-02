@@ -12,8 +12,8 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div>
-        This is a test so far
+      <div className="container">
+        This is a test so farsdafdf222ssfddsafdsfasdfsdssss22s
       </div>
     );
   }
