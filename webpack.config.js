@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const postcssNext = require('postcss-cssnext');
 
 module.exports = {
   devtool: 'source-map',
@@ -20,6 +21,28 @@ module.exports = {
         query: {
           presets: ['es2015', 'react'],
         },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              modules: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                postcssNext,
+              ],
+            },
+          },
+        ],
       },
     ],
   },

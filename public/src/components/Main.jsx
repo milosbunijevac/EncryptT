@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-toolbox/lib/button';
 
 import Name from './Name';
 import Message from './Message';
@@ -13,7 +14,8 @@ class Main extends React.Component {
   render() {
     return (
       <div className="container">
-        This is a test so farsdafdf222ssfddsafdsfasdfsdssss22s
+        <Button label="Hello World" />
+        sss
       </div>
     );
   }
