@@ -9,7 +9,7 @@ class Message extends React.Component {
 
   render() {
     return (
-      <Input type="text" label="Name" name="name" />
+      <Input type="text" label="Message" name="name" />
     );
   }
 }

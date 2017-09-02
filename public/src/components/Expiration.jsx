@@ -9,7 +9,7 @@ class Expiration extends React.Component {
 
   render() {
     return (
-      <DatePicker label="ExpDate" sundayFirstDayOfWeek />
+      <DatePicker label="Expiration Date" sundayFirstDayOfWeek />
     );
   }
 }
