@@ -7,7 +7,12 @@ class Passphrase extends React.Component {
   }
 
   render() {
-    return <p>{this.state.someKey}</p>;
+    return (
+      <div>
+        <h5> Your passphrase - </h5>
+        <h5> Generate new Passphrase </h5>
+      </div>
+    );
   }
 }
 

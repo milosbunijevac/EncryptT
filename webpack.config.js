@@ -8,10 +8,6 @@ module.exports = {
     path.join(__dirname, '/public/src/', 'index.js'),
   ],
   output: ({ path: path.join(`${__dirname}/public/`), filename: 'bundle.js' }),
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
   module: {
     loaders: [
       {

@@ -1,4 +1,5 @@
 import React from 'react';
+import DatePicker from 'react-toolbox/lib/date_picker';
 
 class Expiration extends React.Component {
   constructor() {
@@ -7,7 +8,9 @@ class Expiration extends React.Component {
   }
 
   render() {
-    return <p>{this.state.someKey}</p>;
+    return (
+      <DatePicker label="ExpDate" sundayFirstDayOfWeek />
+    );
   }
 }
 

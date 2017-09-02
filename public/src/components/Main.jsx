@@ -14,8 +14,15 @@ class Main extends React.Component {
   render() {
     return (
       <div className="container">
-        <Button label="Hello World" />
-        sss
+        <h2>Enigma Program</h2>
+        <Name />
+        <Message />
+        <Expiration />
+        <Button label="ENCRYPT" />
+        <Button label="DECRYPT" />
+        <div className="footer">
+          <Passphrase />
+        </div>
       </div>
     );
   }

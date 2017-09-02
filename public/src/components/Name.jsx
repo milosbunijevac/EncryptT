@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from 'react-toolbox/lib/input';
 
 class Name extends React.Component {
   constructor() {
@@ -7,7 +8,11 @@ class Name extends React.Component {
   }
 
   render() {
-    return <p>{this.state.someKey}</p>;
+    return (
+      <div>
+        <Input type="text" label="Name" name="name" />
+      </div>
+    );
   }
 }
 
