@@ -4,11 +4,15 @@ import bodyParser from 'body-parser';
 import webpack from 'webpack';
 
 const config = require('../webpack.config.js');
+const expressGraphQL = require('express-graphql');
+const schema = require('./schema.js');
+
 
 const compiler = webpack(config);
 const port = process.env.PORT || 3000;
 
 const app = express();
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,9 +21,15 @@ app.use(express.static('public'));
 app.use(express.static('css'));
 app.use(express.static('images'));
 
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/src', 'index.html'));
 });
+
+app.use('/graphql', expressGraphQL({
+  schema,
+  graphiql: true,
+}));
 
 app.get('#', (req, res) => {
   console.log('Pound hashtag works');

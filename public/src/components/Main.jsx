@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Button } from 'react-toolbox/lib/button';
 
 import Name from './Name';
@@ -10,10 +11,27 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = { date: new Date() };
+    this.encryptAction = this.encryptAction.bind(this);
   }
 
   handleChange(item, value) {
     this.setState({ [item]: value });
+  }
+
+  encryptAction() {
+    console.log(this.state.date);
+    axios({
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      url: '/graphql',
+      data: {
+        query: `{secretMessage(name:"${this.state.name}") {name}}`,
+      },
+    }).then((response) => {
+      console.log('This is the response from the axios call: ', response);
+    }).catch((error) => {
+      console.log('This is the error from the main axios call: ', error);
+    });
   }
 
   render() {
@@ -23,7 +41,7 @@ class Main extends React.Component {
         <Name handleChange={this.handleChange.bind(this)} />
         <Message handleChange={this.handleChange.bind(this)} />
         <Expiration handleChange={this.handleChange.bind(this)} date={this.state.date} />
-        <Button label="ENCRYPT" />
+        <Button label="ENCRYPT" onClick={this.encryptAction} />
         <Button label="DECRYPT" />
         <div className="footer">
           <Passphrase />
