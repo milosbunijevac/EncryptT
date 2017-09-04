@@ -6,6 +6,7 @@ import Name from './Name';
 import Message from './Message';
 import Expiration from './Expiration';
 import Passphrase from './Passphrase';
+import Decrypt from './Decrypt';
 
 class Main extends React.Component {
   constructor() {
@@ -16,6 +17,9 @@ class Main extends React.Component {
 
   handleChange(item, value) {
     this.setState({ [item]: value });
+    if (item === 'passphrase') {
+      parent.location.hash = value;
+    }
   }
 
   encryptAction() {
@@ -25,6 +29,21 @@ class Main extends React.Component {
       url: '/graphql',
       data: {
         query: `{secretMessage(passphrase:"${this.state.passphrase}", name:"${this.state.name}", message:"${this.state.message}", expirDate:"${this.state.date}") {passphrase, name, message, expirDate}}`,
+      },
+    }).then((response) => {
+      console.log('This is the response from the axios call: ', response);
+    }).catch((error) => {
+      console.log('This is the error from the main axios call: ', error);
+    });
+  }
+
+  decryptAction() {
+    axios({
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      url: '/graphql',
+      data: {
+        query: `{decryptMessage(message: ${this.state.message}) {message}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);

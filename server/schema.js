@@ -1,4 +1,7 @@
 import randomstring from 'randomstring';
+import crypto from 'crypto';
+
+const algorithm = 'aes-256-ctr';
 
 
 const {
@@ -25,6 +28,13 @@ const PassPhrase = new GraphQLObjectType({
   }),
 });
 
+const DecryptMessage = new GraphQLObjectType({
+  name: 'decryptMes',
+  fields: () => ({
+    message: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -37,11 +47,9 @@ const RootQuery = new GraphQLObjectType({
         expirDate: { type: GraphQLString },
       },
       resolve(parVal, args) {
+        const enc = crypto.createCipher(algorithm, `${args.passphrase}`).update(`${args.message}${args.name}${args.expirDate}`, 'utf-8', 'hex');
         return {
-          passphrase: `${args.passphrase}`,
-          name: `${args.name}test`,
-          message: `${args.message}`,
-          expirDate: `${args.expirDate}`,
+          passphrase: enc,
         };
       },
     },
@@ -56,8 +64,19 @@ const RootQuery = new GraphQLObjectType({
           charset: 'alphanumeric',
         });
         return {
-          passphrase: `${passphraser
-          }`,
+          passphrase: `${passphraser}`,
+        };
+      },
+    },
+    decryptMessage: {
+      type: DecryptMessage,
+      args: {
+        message: { type: GraphQLString },
+      },
+      resolve(parVal, args) {
+        const decryptphrase = crypto.createDecipher(algorithm, `${args.passphrase}`).update(`${args.message}`, 'hex', 'utf-8');
+        return {
+          message: `${decryptphrase}`,
         };
       },
     },
