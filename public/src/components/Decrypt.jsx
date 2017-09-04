@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Dialog from 'react-toolbox/lib/dialog';
-import { Button } from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 
 class Decrypt extends React.Component {
