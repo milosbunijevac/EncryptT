@@ -44,7 +44,7 @@ class Main extends React.Component {
         <Button label="ENCRYPT" onClick={this.encryptAction} />
         <Button label="DECRYPT" />
         <div className="footer">
-          <Passphrase />
+          <Passphrase handleChange={this.handleChange.bind(this)} />
         </div>
       </div>
     );
