@@ -22,12 +22,14 @@ class Decrypt extends React.Component {
 
 
   decryptAction() {
+    const hashedPass = document.location.hash;
+    const pass = hashedPass.split('#')[1];
     axios({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       url: '/graphql',
       data: {
-        query: `{decryptMessage(message: ${this.state.message}) {message}}`,
+        query: `{decryptMessage(message: ${this.state.message} passphrase: ${pass}) {message}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);
