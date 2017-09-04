@@ -1,4 +1,6 @@
 import GraphQLDate from 'graphql-date';
+import SHA256 from 'crypto-js/sha256';
+
 
 const {
   GraphQLObjectType,
@@ -13,10 +15,10 @@ const {
 const SecretMessage = new GraphQLObjectType({
   name: 'secretMessage',
   fields: () => ({
-    // id: { type: GraphQLString },
+    passphrase: { type: GraphQLString },
     name: { type: GraphQLString },
-    // message: { type: GraphQLString },
-    // expirDate: { type: GraphQLDate },
+    message: { type: GraphQLString },
+    expirDate: { type: GraphQLString },
   }),
 });
 
@@ -26,10 +28,18 @@ const RootQuery = new GraphQLObjectType({
     secretMessage: {
       type: SecretMessage,
       args: {
+        passphrase: { type: GraphQLString },
         name: { type: GraphQLString },
+        message: { type: GraphQLString },
+        expirDate: { type: GraphQLString },
       },
       resolve(parVal, args) {
-        return { name: `${args.name}test` };
+        return {
+          passphrase: `${args.passphrase}`,
+          name: `${args.name}test`,
+          message: `${args.message}`,
+          expirDate: `${args.expirDate}`,
+        };
       },
     },
   },

@@ -25,7 +25,7 @@ class Main extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       url: '/graphql',
       data: {
-        query: `{secretMessage(name:"${this.state.name}") {name}}`,
+        query: `{secretMessage(passphrase:"test", name:"${this.state.name}", message:"${this.state.message}", expirDate:"${this.state.date}") {passphrase, name, message, expirDate}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);
