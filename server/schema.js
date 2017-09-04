@@ -32,6 +32,7 @@ const DecryptMessage = new GraphQLObjectType({
   name: 'decryptMes',
   fields: () => ({
     message: { type: GraphQLString },
+    passphrase: { type: GraphQLString },
   }),
 });
 
@@ -72,6 +73,7 @@ const RootQuery = new GraphQLObjectType({
       type: DecryptMessage,
       args: {
         message: { type: GraphQLString },
+        passphrase: { type: GraphQLString },
       },
       resolve(parVal, args) {
         const decryptphrase = crypto.createDecipher(algorithm, `${args.passphrase}`).update(`${args.message}`, 'hex', 'utf-8');

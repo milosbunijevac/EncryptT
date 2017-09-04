@@ -7,7 +7,7 @@ import Input from 'react-toolbox/lib/input';
 class Decrypt extends React.Component {
   constructor() {
     super();
-    this.state = { active: false };
+    this.state = { active: true, decryptmessage: '' };
     this.handleToggle = this.handleToggle.bind(this);
   }
 
@@ -15,22 +15,48 @@ class Decrypt extends React.Component {
     this.setState({ active: !this.state.active });
   }
 
+
+  handleDecryptMessage(name, value) {
+    this.setState({ [name]: value });
+  }
+
+
+  decryptAction() {
+    axios({
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      url: '/graphql',
+      data: {
+        query: `{decryptMessage(message: ${this.state.message}) {message}}`,
+      },
+    }).then((response) => {
+      console.log('This is the response from the axios call: ', response);
+    }).catch((error) => {
+      console.log('This is the error from the main axios call: ', error);
+    });
+  }
+
   render() {
     const actions = [
       { label: 'Cancel', onClick: this.handleToggle },
-      { label: 'Save', onClick: this.handleToggle },
+      { label: 'Decrypt', onClick: this.handleToggle },
     ];
     return (
       <div>
-        <Button label="Show my dialog" onClick={this.handleToggle} />
         <Dialog
           actions={actions}
           active={this.state.active}
           onEscKeyDown={this.handleToggle}
           onOverlayClick={this.handleToggle}
-          title="My awesome dialog"
+          title="De/Encrypt"
         >
-          <p>Here you can add arbitrary content. Components like Pickers are using dialogs now.</p>
+          <Input
+            type="text"
+            label="Message"
+            name="name"
+            value={this.state.decryptmessage}
+            onChange={this.handleDecryptMessage.bind(this, 'decryptmessage')}
+          />
         </Dialog>
       </div>
     );

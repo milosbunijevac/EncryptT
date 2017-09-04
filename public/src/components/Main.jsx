@@ -42,21 +42,6 @@ class Main extends React.Component {
     });
   }
 
-  decryptAction() {
-    axios({
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      url: '/graphql',
-      data: {
-        query: `{decryptMessage(message: ${this.state.message}) {message}}`,
-      },
-    }).then((response) => {
-      console.log('This is the response from the axios call: ', response);
-    }).catch((error) => {
-      console.log('This is the error from the main axios call: ', error);
-    });
-  }
-
   render() {
     return (
       <div className="container mainFrame">
