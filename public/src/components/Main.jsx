@@ -10,7 +10,7 @@ import Passphrase from './Passphrase';
 class Main extends React.Component {
   constructor() {
     super();
-    this.state = { date: new Date() };
+    this.state = { date: new Date(), passphrase: 'ab1Zq' };
     this.encryptAction = this.encryptAction.bind(this);
   }
 
@@ -24,7 +24,7 @@ class Main extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       url: '/graphql',
       data: {
-        query: `{secretMessage(passphrase:"test", name:"${this.state.name}", message:"${this.state.message}", expirDate:"${this.state.date}") {passphrase, name, message, expirDate}}`,
+        query: `{secretMessage(passphrase:"${this.state.passphrase}", name:"${this.state.name}", message:"${this.state.message}", expirDate:"${this.state.date}") {passphrase, name, message, expirDate}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);
@@ -43,7 +43,7 @@ class Main extends React.Component {
         <Button label="ENCRYPT" onClick={this.encryptAction} />
         <Button label="DECRYPT" />
         <div className="footer">
-          <Passphrase handleChange={this.handleChange.bind(this)} />
+          <Passphrase handleChange={this.handleChange.bind(this)} passphrase={this.state.passphrase} />
         </div>
       </div>
     );

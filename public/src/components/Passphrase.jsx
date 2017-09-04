@@ -6,8 +6,18 @@ import theme from 'react-toolbox/lib/ripple/theme.css';
 class Passphrase extends React.Component {
   constructor() {
     super();
-    this.state = { passphrase: 'ab1Zq' };
+    this.state = { passphrase: '' };
     this.genNewPhrase = this.genNewPhrase.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ passphrase: this.props.passphrase });
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.passphrase !== this.state.passphrase) {
+      this.props.handleChange('passphrase', nextState.passphrase);
+    }
   }
 
   genNewPhrase() {
@@ -34,8 +44,8 @@ class Passphrase extends React.Component {
     const RippleLink = Ripple({ spread: 1 })(Link);
     return (
       <div>
-        Your passphrase - <RippleLink href="#" theme={theme}> {this.state.passphrase} </RippleLink>
-        <a href="#" className="row" onClick={this.genNewPhrase}> Generate new Passphrase </a>
+        Your passphrase - <RippleLink href="#" theme={theme} > {this.state.passphrase } </RippleLink>
+        <a href="#" className="row" onClick={this.genNewPhrase} > Generate new Passphrase </a>
       </div>
     );
   }
