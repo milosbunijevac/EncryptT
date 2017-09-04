@@ -1,14 +1,11 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import webpack from 'webpack';
 
-const config = require('../webpack.config.js');
 const expressGraphQL = require('express-graphql');
 const schema = require('./schema.js');
 
 
-const compiler = webpack(config);
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -30,14 +27,6 @@ app.use('/graphql', expressGraphQL({
   schema,
   graphiql: true,
 }));
-
-app.get('#', (req, res) => {
-  console.log('Pound hashtag works');
-});
-
-app.post('passphrase', (req, res) => {
-  console.log('passphrase tag works');
-});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/src', 'index.html'));
