@@ -11,8 +11,9 @@ import Decrypt from './Decrypt';
 class Main extends React.Component {
   constructor() {
     super();
-    this.state = { date: new Date(), passphrase: 'ab1Zq' };
+    this.state = { date: new Date(), passphrase: 'ab1Zq', activeDiag: false };
     this.encryptAction = this.encryptAction.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleChange(item, value) {
@@ -20,6 +21,10 @@ class Main extends React.Component {
     if (item === 'passphrase') {
       parent.location.hash = value;
     }
+  }
+
+  handleToggle() {
+    this.setState({ activeDiag: !this.state.activeDiag });
   }
 
   encryptAction() {
@@ -59,11 +64,13 @@ class Main extends React.Component {
         <Name handleChange={this.handleChange.bind(this)} />
         <Message handleChange={this.handleChange.bind(this)} message={(this.state.message) ? this.state.message : ''} />
         <Expiration handleChange={this.handleChange.bind(this)} date={this.state.date} />
+
         <Button label="ENCRYPT" onClick={this.encryptAction} />
-        <Button label="DECRYPT" />
+        <Button label="DECRYPT" onClick={this.handleToggle} />
         <div className="footer">
           <Passphrase handleChange={this.handleChange.bind(this)} passphrase={this.state.passphrase} />
         </div>
+        {this.state.activeDiag ? <Decrypt handleChange={this.handleChange.bind(this)} /> : null}
       </div>
     );
   }
