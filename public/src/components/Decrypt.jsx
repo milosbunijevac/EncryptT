@@ -4,10 +4,11 @@ import Dialog from 'react-toolbox/lib/dialog';
 import Input from 'react-toolbox/lib/input';
 
 class Decrypt extends React.Component {
-  constructor() {
-    super();
-    this.state = { active: true, decryptmessage: '' };
+  constructor(props) {
+    super(props);
+    this.state = { active: true, decryptmessage: 'Enter a message to de/encrypt' };
     this.handleToggle = this.handleToggle.bind(this);
+    this.decryptAction = this.decryptAction.bind(this);
   }
 
   handleToggle() {
@@ -28,10 +29,13 @@ class Decrypt extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       url: '/graphql',
       data: {
-        query: `{decryptMessage(message: ${this.state.message} passphrase: ${pass}) {message}}`,
+        query: `{decryptMessage(message: "${this.props.encrypted}" passphrase: "${pass}") {message}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);
+
+      this.props.handleChange('decryptedmessage', response.data.data.decryptMessage.message);
+      this.handleToggle();
     }).catch((error) => {
       console.log('This is the error from the main axios call: ', error);
     });
@@ -40,7 +44,7 @@ class Decrypt extends React.Component {
   render() {
     const actions = [
       { label: 'Cancel', onClick: this.handleToggle },
-      { label: 'Decrypt', onClick: this.handleToggle },
+      { label: 'Decrypt', onClick: this.decryptAction },
     ];
     return (
       <div>
@@ -55,7 +59,7 @@ class Decrypt extends React.Component {
             type="text"
             label="Message"
             name="name"
-            value={this.state.decryptmessage}
+            value={(this.props.encrypted) ? this.props.encrypted : this.state.decryptmessage}
             onChange={this.handleDecryptMessage.bind(this, 'decryptmessage')}
           />
         </Dialog>

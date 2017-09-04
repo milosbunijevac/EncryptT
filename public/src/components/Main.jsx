@@ -36,8 +36,8 @@ class Main extends React.Component {
         query: `{secretMessage(passphrase:"${this.state.passphrase}", name:"${this.state.name}", message:"${this.state.message}", expirDate:"${this.state.date}") {passphrase, name, message, expirDate}}`,
       },
     }).then((response) => {
-      this.handleToggle();
       this.setState({ encrypted: response.data.data.secretMessage.passphrase });
+      this.handleToggle();
     }).catch((error) => {
       console.log('This is the error from the main axios call: ', error);
     });
@@ -56,7 +56,7 @@ class Main extends React.Component {
         <div className="footer">
           <Passphrase handleChange={this.handleChange.bind(this)} passphrase={this.state.passphrase} />
         </div>
-        {this.state.activeDiag ? <Decrypt handleChange={this.handleChange.bind(this)} /> : null}
+        {this.state.activeDiag ? <Decrypt handleChange={this.handleChange.bind(this)} encrypted={(this.state.encrypted) ? this.state.encrypted : null} /> : null}
       </div>
     );
   }
