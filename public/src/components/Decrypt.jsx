@@ -29,7 +29,7 @@ class Decrypt extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       url: '/graphql',
       data: {
-        query: `{decryptMessage(message: "${this.props.encrypted}" passphrase: "${pass}") {message}}`,
+        query: `{decryptMessage(message: "${this.props.encrypted}" passphrase: "${pass}" date: "${this.props.date}") {message}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);

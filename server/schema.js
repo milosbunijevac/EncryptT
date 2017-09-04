@@ -48,7 +48,7 @@ const RootQuery = new GraphQLObjectType({
         expirDate: { type: GraphQLString },
       },
       resolve(parVal, args) {
-        const enc = crypto.createCipher(algorithm, `${args.passphrase}`).update(`${args.message}${args.name}${args.expirDate}`, 'utf-8', 'hex');
+        const enc = crypto.createCipher(algorithm, `${args.passphrase}`).update(`${args.message}#${args.name}#${args.expirDate}`, 'utf-8', 'hex');
         return {
           passphrase: enc,
         };
@@ -74,11 +74,25 @@ const RootQuery = new GraphQLObjectType({
       args: {
         message: { type: GraphQLString },
         passphrase: { type: GraphQLString },
+        date: { type: GraphQLString },
       },
       resolve(parVal, args) {
         const decryptphrase = crypto.createDecipher(algorithm, `${args.passphrase}`).update(`${args.message}`, 'hex', 'utf-8');
+        const decryptedarray = decryptphrase.split('#');
+        const decmessage = decryptedarray[0];
+        const currentdate = new Date();
+        const name = decryptedarray[1];
+        const expdate = decryptedarray[2];
+        const currD = new Date(args.date);
+        const expD = new Date(decryptedarray[2]);
+        let response = '';
+        if (expD.getTime() < currentdate.getTime()) {
+          response = 'The message has either expired or is an invalid message';
+        } else {
+          response = decmessage;
+        }
         return {
-          message: `${decryptphrase}`,
+          message: `${response}`,
         };
       },
     },

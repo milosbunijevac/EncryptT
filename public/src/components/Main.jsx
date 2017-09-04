@@ -56,7 +56,7 @@ class Main extends React.Component {
         <div className="footer">
           <Passphrase handleChange={this.handleChange.bind(this)} passphrase={this.state.passphrase} />
         </div>
-        {this.state.activeDiag ? <Decrypt handleChange={this.handleChange.bind(this)} encrypted={(this.state.encrypted) ? this.state.encrypted : null} /> : null}
+        {this.state.activeDiag ? <Decrypt handleChange={this.handleChange.bind(this)} date={this.state.date} encrypted={(this.state.encrypted) ? this.state.encrypted : null} /> : null}
       </div>
     );
   }
