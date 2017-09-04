@@ -1,5 +1,6 @@
 import GraphQLDate from 'graphql-date';
 import SHA256 from 'crypto-js/sha256';
+import randomstring from 'randomstring';
 
 
 const {
@@ -22,6 +23,13 @@ const SecretMessage = new GraphQLObjectType({
   }),
 });
 
+const PassPhrase = new GraphQLObjectType({
+  name: 'passPhrase',
+  fields: () => ({
+    passphrase: { type: GraphQLString },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -39,6 +47,22 @@ const RootQuery = new GraphQLObjectType({
           name: `${args.name}test`,
           message: `${args.message}`,
           expirDate: `${args.expirDate}`,
+        };
+      },
+    },
+    passPhrase: {
+      type: PassPhrase,
+      args: {
+        passphrase: { type: GraphQLString },
+      },
+      resolve(parVal, args) {
+        const passphraser = randomstring.generate({
+          length: 5,
+          charset: 'alphanumeric',
+        });
+        return {
+          passphrase: `${passphraser
+          }`,
         };
       },
     },

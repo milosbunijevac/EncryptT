@@ -14,7 +14,9 @@ class Message extends React.Component {
         type="text"
         label="Message"
         name="name"
+        value={this.props.message}
         onChange={this.props.handleChange.bind(this, 'message')}
+        maxLength={120}
       />
     );
   }

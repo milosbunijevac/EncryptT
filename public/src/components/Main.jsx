@@ -19,7 +19,6 @@ class Main extends React.Component {
   }
 
   encryptAction() {
-    console.log(this.state.date);
     axios({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -39,7 +38,7 @@ class Main extends React.Component {
       <div className="container mainFrame">
         <h2>Enigma Program</h2>
         <Name handleChange={this.handleChange.bind(this)} />
-        <Message handleChange={this.handleChange.bind(this)} />
+        <Message handleChange={this.handleChange.bind(this)} message={(this.state.message) ? this.state.message : ''} />
         <Expiration handleChange={this.handleChange.bind(this)} date={this.state.date} />
         <Button label="ENCRYPT" onClick={this.encryptAction} />
         <Button label="DECRYPT" />
