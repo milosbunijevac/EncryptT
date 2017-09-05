@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Input from 'react-toolbox/lib/input';
 
 class Message extends React.Component {

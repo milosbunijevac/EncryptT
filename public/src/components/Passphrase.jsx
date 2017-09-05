@@ -9,6 +9,7 @@ class Passphrase extends React.Component {
     super();
     this.state = { passphrase: '' };
     this.genNewPhrase = this.genNewPhrase.bind(this);
+    this.copyClipboard = this.copyClipboard.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,27 @@ class Passphrase extends React.Component {
       this.props.handleChange('passphrase', nextState.passphrase);
     }
   }
+
+
+  copyClipboard() {
+    const elem = document.getElementById('pass');
+    const tocopy = `#${elem.innerText}`;
+    const textArea = document.createElement('textarea'); // Need to create textArea to select text/copy to clipboard
+    textArea.style.position = 'fixed';
+    textArea.value = tocopy;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      const msg = successful ? 'successful' : 'unsuccessful';
+      console.log(`Copying text command was ${msg}`);
+    } catch (err) {
+      console.log('Oops, unable to copy ', err);
+    } finally {
+      document.body.removeChild(textArea);
+    }
+  }
+
 
   genNewPhrase() {
     axios({
@@ -50,7 +72,7 @@ class Passphrase extends React.Component {
     const TooltipLink = Tooltip(Link);
     return (
       <div>
-        Your passphrase - <TooltipLink label={this.state.passphrase} tooltip="Click to copy to clipboard"><RippleLink href={`#${this.state.passphrase}`} theme={theme} >
+        Your passphrase - <TooltipLink label={this.state.passphrase} tooltip="Click to copy to clipboard"><RippleLink id="pass" onClick={this.copyClipboard} href={`#${this.state.passphrase}`} theme={theme} >
           { this.state.passphrase }
         </RippleLink></TooltipLink>
         <a href="#" className="row" onClick={this.genNewPhrase} > Generate new Passphrase </a>

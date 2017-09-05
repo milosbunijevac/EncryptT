@@ -1,3 +1,9 @@
+#Attention
+ATTENTION: Expiration date cannot be set as the current date or else the message will have already expired.
+Choose a date in the future.
+
+---------------------------------------------------
+
 #Encryption
 
 To operate, first navigate to the project directory and run `npm install`. 
