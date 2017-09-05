@@ -11,7 +11,10 @@ class Passphrase extends React.Component {
   }
 
   componentDidMount() {
-    const customphrase = document.location.hash.split('#')[1];
+    let customphrase = document.location.hash.split('#')[1];
+    if (customphrase == undefined) {
+      customphrase = 'ab1Zq';
+    }
     this.setState({ passphrase: customphrase });
   }
 
