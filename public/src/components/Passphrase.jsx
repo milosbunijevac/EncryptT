@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Tooltip from 'react-toolbox/lib/tooltip';
 import Ripple from 'react-toolbox/lib/ripple';
 import theme from 'react-toolbox/lib/ripple/theme.css';
 
@@ -12,7 +13,7 @@ class Passphrase extends React.Component {
 
   componentDidMount() {
     let customphrase = document.location.hash.split('#')[1];
-    if (customphrase == undefined) {
+    if (customphrase === undefined) {
       customphrase = 'ab1Zq';
     }
     this.setState({ passphrase: customphrase });
@@ -46,11 +47,12 @@ class Passphrase extends React.Component {
       </a>
     );
     const RippleLink = Ripple({ spread: 1 })(Link);
+    const TooltipLink = Tooltip(Link);
     return (
       <div>
-        Your passphrase - <RippleLink href="#" theme={theme} >
+        Your passphrase - <TooltipLink label={this.state.passphrase} tooltip="Click to copy to clipboard"><RippleLink href={`#${this.state.passphrase}`} theme={theme} >
           { this.state.passphrase }
-        </RippleLink>
+        </RippleLink></TooltipLink>
         <a href="#" className="row" onClick={this.genNewPhrase} > Generate new Passphrase </a>
       </div>
     );
