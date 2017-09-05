@@ -1,11 +1,10 @@
 const path = require('path');
-const webpack = require('webpack');
 const postcssNext = require('postcss-cssnext');
 
 module.exports = {
   devtool: 'source-map',
   entry: [
-    path.join(__dirname, '/public/src/', 'index.js'),
+    path.join(__dirname, '/public/src/', 'index.jsx'),
   ],
   output: ({ path: path.join(`${__dirname}/public/`), filename: 'bundle.js' }),
   module: {

@@ -14,6 +14,7 @@ class Main extends React.Component {
     this.state = { date: new Date(), passphrase: 'ab1Zq', activeDiag: false };
     this.encryptAction = this.encryptAction.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(item, value) {
@@ -47,16 +48,24 @@ class Main extends React.Component {
     return (
       <div className="container mainFrame">
         <h2>Enigma Program</h2>
-        <Name handleChange={this.handleChange.bind(this)} />
-        <Message handleChange={this.handleChange.bind(this)} message={(this.state.message) ? this.state.message : ''} />
-        <Expiration handleChange={this.handleChange.bind(this)} date={this.state.date} />
+        <Name handleChange={this.handleChange} />
+        <Message handleChange={this.handleChange} message={(this.state.message) ? this.state.message : ''} />
+        <Expiration handleChange={this.handleChange} date={this.state.date} />
 
         <Button label="ENCRYPT" onClick={this.encryptAction} />
         <Button label="DECRYPT" onClick={this.handleToggle} />
         <div className="footer">
-          <Passphrase handleChange={this.handleChange.bind(this)} passphrase={this.state.passphrase} />
+          <Passphrase
+            handleChange={this.handleChange}
+            passphrase={this.state.passphrase}
+          />
         </div>
-        {this.state.activeDiag ? <Decrypt handleChange={this.handleChange.bind(this)} date={this.state.date} encrypted={(this.state.encrypted) ? this.state.encrypted : null} /> : null}
+        {this.state.activeDiag ?
+          <Decrypt
+            handleChange={this.handleChange}
+            date={this.state.date}
+            encrypted={(this.state.encrypted) ? this.state.encrypted : null}
+          /> : null}
       </div>
     );
   }

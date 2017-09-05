@@ -45,7 +45,9 @@ class Passphrase extends React.Component {
     const RippleLink = Ripple({ spread: 1 })(Link);
     return (
       <div>
-        Your passphrase - <RippleLink href="#" theme={theme} > {this.state.passphrase } </RippleLink>
+        Your passphrase - <RippleLink href="#" theme={theme} >
+          {this.state.passphrase }
+        </RippleLink>
         <a href="#" className="row" onClick={this.genNewPhrase} > Generate new Passphrase </a>
       </div>
     );

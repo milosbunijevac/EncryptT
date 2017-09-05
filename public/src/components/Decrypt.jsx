@@ -34,7 +34,9 @@ class Decrypt extends React.Component {
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);
-
+      if (response.data.data.decryptMessage.message === 'The message has either expired or is an invalid message') {
+        alert(response.data.data.decryptMessage.message);
+      }
       this.props.handleChange('message', response.data.data.decryptMessage.message);
       this.handleToggle();
     }).catch((error) => {
