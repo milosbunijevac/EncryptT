@@ -24,17 +24,18 @@ class Decrypt extends React.Component {
   decryptAction() {
     const hashedPass = document.location.hash;
     const pass = hashedPass.split('#')[1];
+    const entryPoint = (this.props.encrypted) ? this.props.encrypted : this.state.decryptmessage;
     axios({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       url: '/graphql',
       data: {
-        query: `{decryptMessage(message: "${this.props.encrypted}" passphrase: "${pass}" date: "${this.props.date}") {message}}`,
+        query: `{decryptMessage(message: "${entryPoint}" passphrase: "${pass}" date: "${this.props.date}") {message}}`,
       },
     }).then((response) => {
       console.log('This is the response from the axios call: ', response);
 
-      this.props.handleChange('decryptedmessage', response.data.data.decryptMessage.message);
+      this.props.handleChange('message', response.data.data.decryptMessage.message);
       this.handleToggle();
     }).catch((error) => {
       console.log('This is the error from the main axios call: ', error);

@@ -81,9 +81,6 @@ const RootQuery = new GraphQLObjectType({
         const decryptedarray = decryptphrase.split('#');
         const decmessage = decryptedarray[0];
         const currentdate = new Date();
-        const name = decryptedarray[1];
-        const expdate = decryptedarray[2];
-        const currD = new Date(args.date);
         const expD = new Date(decryptedarray[2]);
         let response = '';
         if (expD.getTime() < currentdate.getTime()) {
