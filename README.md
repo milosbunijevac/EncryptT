@@ -12,4 +12,5 @@ will pop up indicating that the message is invalid or has expired.
 
 If you would like to decrypt a message with a specific passphrase, enter the passphrase into the url like so:
 http://localhost:3000/#{passphrase} without the brackets and hit enter. The entered passphrase will show up
-next to "Your passphrase - " at the bottom of the window.
+next to "Your passphrase - " at the bottom of the window. NOTE: You may have to hit enter twice while in
+the address bar for your passphrase to show up at the bottom of the window.

@@ -49,7 +49,7 @@ class Passphrase extends React.Component {
     return (
       <div>
         Your passphrase - <RippleLink href="#" theme={theme} >
-          {this.state.passphrase }
+          { this.state.passphrase }
         </RippleLink>
         <a href="#" className="row" onClick={this.genNewPhrase} > Generate new Passphrase </a>
       </div>
